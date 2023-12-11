@@ -6,7 +6,7 @@ import java.util.List;
 
 public record Face(List<Object2IntMap<Type>> list) {
 
-    enum Type {
+    public enum Type {
         VERTEX,
         TEXTURE,
         NORMAL
