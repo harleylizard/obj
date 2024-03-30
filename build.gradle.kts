@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("io.freefair.lombok") version "8.4"
+    `maven-publish`
 }
 
 group = "com.harleylizard"
@@ -18,4 +19,26 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+            from(components["java"])
+            groupId = "com.harleylizard"
+            artifactId = "obj"
+            version = "1.0-SNAPSHOT"
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+java {
+    targetCompatibility = JavaVersion.VERSION_19
+    sourceCompatibility = JavaVersion.VERSION_19
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
+    }
 }

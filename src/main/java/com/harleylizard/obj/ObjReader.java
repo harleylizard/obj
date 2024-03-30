@@ -62,7 +62,7 @@ public final class ObjReader {
                 case "f" -> {
                     var length = tokens.length - 1;
 
-                    var list = new ArrayList<Object2IntMap<Face.Type>>(length);
+                    var list = new ArrayList<Object2IntMap<Attribute>>(length);
                     for (var i = 0; i < length; i++) {
                         list.add(createMap(tokens[i + 1]));
                     }
@@ -79,19 +79,19 @@ public final class ObjReader {
         );
     }
 
-    private Object2IntMap<Face.Type> createMap(String token) {
-        var map = new Object2IntArrayMap<Face.Type>();
+    private Object2IntMap<Attribute> createMap(String token) {
+        var map = new Object2IntArrayMap<Attribute>();
 
         String[] split;
         if (token.contains("//")) {
             split = token.split("//", 2);
-            map.put(Face.Type.VERTEX, Integer.parseInt(split[0]));
-            map.put(Face.Type.NORMAL, Integer.parseInt(split[1]));
+            map.put(Attribute.POSITION, Integer.parseInt(split[0]));
+            map.put(Attribute.NORMAL, Integer.parseInt(split[1]));
         } else {
             split = token.split("/", 3);
-            map.put(Face.Type.VERTEX, Integer.parseInt(split[0]));
-            map.put(Face.Type.TEXTURE, Integer.parseInt(split[1]));
-            map.put(Face.Type.NORMAL, Integer.parseInt(split[2]));
+            map.put(Attribute.POSITION, Integer.parseInt(split[0]));
+            map.put(Attribute.TEXTURE, Integer.parseInt(split[1]));
+            map.put(Attribute.NORMAL, Integer.parseInt(split[2]));
         }
 
         return Object2IntMaps.unmodifiable(map);
